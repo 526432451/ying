@@ -6,8 +6,11 @@
 
   <groupId>com.cjy</groupId>
   <artifactId>ying</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <version>1.0.0</version>
+  <modules>
+    <module>cms</module>
+  </modules>
+  <packaging>pom</packaging>
 
   <name>ying Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
