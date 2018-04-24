@@ -7,9 +7,9 @@
   <groupId>com.cjy</groupId>
   <artifactId>ying</artifactId>
   <version>1.0.0</version>
-  <modules>
+  <!--<modules>
     <module>cms</module>
-  </modules>
+  </modules>-->
   <packaging>pom</packaging>
 
   <name>ying Maven Webapp</name>
