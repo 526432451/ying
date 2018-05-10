@@ -7,9 +7,6 @@
     <groupId>com.cjy</groupId>
     <artifactId>cms</artifactId>
     <version>1.0.0</version>
-    <modules>
-        <module>cms-dao</module>
-    </modules>
     <packaging>pom</packaging>
 
     <name>cms</name>
@@ -17,5 +14,11 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <modules>
+        <module>cms-dao</module>
+        <module>cms-service</module>
+        <module>cms-web</module>
+    </modules>
 
 </project>
