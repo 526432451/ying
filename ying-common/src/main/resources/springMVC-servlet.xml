@@ -13,8 +13,8 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- 扫描controller -->
-    <context:component-scan base-package="**.*controller" />
     <context:annotation-config />
+    <context:component-scan base-package="**.*controller" />
 
     <!-- 支持controller返回json -->
     <mvc:annotation-driven>

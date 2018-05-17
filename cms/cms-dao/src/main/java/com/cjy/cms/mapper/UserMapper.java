@@ -2,9 +2,12 @@ package com.cjy.cms.mapper;
 
 import com.cjy.cms.model.User;
 import com.cjy.cms.model.UserExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface UserMapper {
     int countByExample(UserExample example);
 
