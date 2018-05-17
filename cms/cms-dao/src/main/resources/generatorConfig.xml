@@ -24,16 +24,23 @@
                         password="${jdbc.password}"/>
 
         <!-- model生成 -->
-        <javaModelGenerator targetPackage="com.cjy.model" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="com.cjy.cms.model" targetProject="src/main/java"/>
 
         <!-- MapperXML生成 -->
-        <sqlMapGenerator targetPackage="com.cjy.mapper" targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="com.cjy.cms.mapper" targetProject="src/main/java"/>
 
         <!-- Mapper接口生成 -->
-        <javaClientGenerator targetPackage="com.cjy.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
+        <javaClientGenerator targetPackage="com.cjy.cms.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
 
         <!-- 需要映射的表 -->
         <table tableName="user" domainObjectName="User"></table>
         <table tableName="book" domainObjectName="Book"></table>
+
+        <table tableName="cms_article" domainObjectName="CmsArticle"></table>
+        <table tableName="cms_category" domainObjectName="CmsCategory"></table>
+        <table tableName="cms_tag" domainObjectName="CmsTag"></table>
+        <table tableName="cms_article_category" domainObjectName="CmsArticleCategory"></table>
+        <table tableName="cms_article_tag" domainObjectName="CmsArticleTag"></table>
+        <table tableName="cms_category_tag" domainObjectName="CmsCategoryTag"></table>
     </context>
 </generatorConfiguration>

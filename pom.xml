@@ -9,6 +9,7 @@
   <version>1.0.0</version>
   <modules>
     <module>cms</module>
+    <module>ying-common</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -33,6 +34,7 @@
 
   <build>
     <finalName>ying</finalName>
+    <defaultGoal>compile</defaultGoal>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>
