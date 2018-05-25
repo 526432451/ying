@@ -1,4 +1,4 @@
-package com.cjy.cms.cms.controller;
+package com.cjy.cms.controller;
 
 import com.cjy.cms.model.User;
 import com.cjy.cms.service.UserService;

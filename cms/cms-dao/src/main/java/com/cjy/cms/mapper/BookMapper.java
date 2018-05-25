@@ -2,9 +2,8 @@ package com.cjy.cms.mapper;
 
 import com.cjy.cms.model.Book;
 import com.cjy.cms.model.BookExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface BookMapper {
     int countByExample(BookExample example);
