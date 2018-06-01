@@ -1,6 +1,6 @@
 package com.cjy.cms.controller;
 
-import com.cjy.common.util.EhCacheUtil;
+import com.cjy.common.EhCacheUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

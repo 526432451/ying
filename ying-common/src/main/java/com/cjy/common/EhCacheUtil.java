@@ -1,4 +1,4 @@
-package com.cjy.common.util;
+package com.cjy.common;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;

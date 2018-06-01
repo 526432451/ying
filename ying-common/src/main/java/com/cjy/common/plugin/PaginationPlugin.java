@@ -1,8 +1,11 @@
-package com.cjy.common.util.plugin;
+package com.cjy.common.plugin;
 
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.*;
+import org.mybatis.generator.api.dom.xml.Attribute;
+import org.mybatis.generator.api.dom.xml.TextElement;
+import org.mybatis.generator.api.dom.xml.XmlElement;
 
 import java.util.List;
 
@@ -69,4 +72,30 @@ public class PaginationPlugin extends PluginAdapter {
 
         return true;
     }
+
+    /**
+     * 为Mapper.xml的selectByExample添加limit
+     */
+    @Override
+    public boolean sqlMapSelectByExampleWithoutBLOBsElementGenerated(XmlElement element,
+                                                                     IntrospectedTable introspectedTable) {
+
+        XmlElement ifLimitNotNullElement = new XmlElement("if");
+        ifLimitNotNullElement.addAttribute(new Attribute("test", "limit != null"));
+
+        XmlElement ifOffsetNotNullElement = new XmlElement("if");
+        ifOffsetNotNullElement.addAttribute(new Attribute("test", "offset != null"));
+        ifOffsetNotNullElement.addElement(new TextElement("limit ${offset}, ${limit}"));
+        ifLimitNotNullElement.addElement(ifOffsetNotNullElement);
+
+        XmlElement ifOffsetNullElement = new XmlElement("if");
+        ifOffsetNullElement.addAttribute(new Attribute("test", "offset == null"));
+        ifOffsetNullElement.addElement(new TextElement("limit ${limit}"));
+        ifLimitNotNullElement.addElement(ifOffsetNullElement);
+
+        element.addElement(ifLimitNotNullElement);
+
+        return true;
+    }
+
 }

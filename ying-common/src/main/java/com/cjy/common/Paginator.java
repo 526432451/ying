@@ -1,9 +1,9 @@
-package com.cjy.cms.util;
+package com.cjy.common;
 
 /**
  * 分页实体类
  * @author chenjiaying
- * @date 2018年05月02日 下午 05:25
+ * @date 2018年05月31日 下午 04:25
  */
 public class Paginator {
 
@@ -224,5 +224,4 @@ public class Paginator {
         }
         return pages;
     }
-
 }

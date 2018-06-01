@@ -8,8 +8,8 @@
   <artifactId>ying</artifactId>
   <version>1.0.0</version>
   <modules>
-    <module>cms</module>
     <module>ying-common</module>
+    <module>cms</module>
   </modules>
   <packaging>pom</packaging>
 

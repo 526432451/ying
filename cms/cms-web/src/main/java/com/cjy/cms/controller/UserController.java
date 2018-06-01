@@ -1,10 +1,10 @@
 package com.cjy.cms.controller;
 
 
-import com.cjy.cms.model.UserExample;
-import com.cjy.cms.util.Paginator;
 import com.cjy.cms.model.User;
+import com.cjy.cms.model.UserExample;
 import com.cjy.cms.service.UserService;
+import com.cjy.common.Paginator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = {"", "index"})
     public String index() {
-        return "/index";
+        return "redirect:/user/list";
     }
 
     /**
@@ -62,7 +62,11 @@ public class UserController extends BaseController {
     public String list(
             @RequestParam(required = false, defaultValue = "1") int page,
             @RequestParam(required = false, defaultValue = "20") int rows,
-            HttpServletRequest request) {
+            HttpServletRequest request, Model model) {
+
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andIdGreaterThan(0);
+
         // 查询参数
         String clumns = " * ";
         String condition = " id>0 ";

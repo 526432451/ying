@@ -1,4 +1,4 @@
-package com.cjy.common.util;
+package com.cjy.common;
 
 import java.util.ResourceBundle;
 
