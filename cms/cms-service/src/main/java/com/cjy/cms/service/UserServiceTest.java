@@ -1,7 +1,7 @@
 package com.cjy.cms.service;
 
-import com.cjy.cms.model.User;
-import com.cjy.cms.model.UserVO;
+import com.cjy.cms.dao.model.User;
+import com.cjy.cms.dao.model.UserVO;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;

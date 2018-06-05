@@ -1,8 +1,8 @@
 package com.cjy.cms.controller;
 
 
-import com.cjy.cms.model.User;
-import com.cjy.cms.model.UserExample;
+import com.cjy.cms.dao.model.User;
+import com.cjy.cms.dao.model.UserExample;
 import com.cjy.cms.service.UserService;
 import com.cjy.common.Paginator;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController extends BaseController {
 
-    private static Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static Logger _log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -60,16 +60,17 @@ public class UserController extends BaseController {
      */
     @RequestMapping("/list")
     public String list(
-            @RequestParam(required = false, defaultValue = "1") int page,
-            @RequestParam(required = false, defaultValue = "20") int rows,
+            @RequestParam(required = false, defaultValue = "1", value = "page") int page,
+            @RequestParam(required = false, defaultValue = "20", value = "rows") int rows,
             HttpServletRequest request, Model model) {
 
         UserExample userExample = new UserExample();
-        userExample.createCriteria().andIdGreaterThan(0);
+        userExample.createCriteria()
+                .andIdGreaterThan(0);
         userExample.setOffset((page -1) * rows);
         userExample.setLimit(rows);
         userExample.setDistinct(false);
-        userExample.setOrderByClause(" id desc ");
+        userExample.setOrderByClause(" id asc ");
         List<User> users = userService.getMapper().selectByExample(userExample);
         model.addAttribute("users", users);
 
@@ -82,7 +83,7 @@ public class UserController extends BaseController {
         paginator.setParam("page");
         paginator.setUrl(request.getRequestURI());
         paginator.setQuery(request.getQueryString());
-        model.addAttribute("paginator",paginator);
+        model.addAttribute("paginator", paginator);
 
         return "/user/list";
     }
@@ -103,32 +104,19 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(@Valid  User user, BindingResult binding) {
+    public String add(@Valid User user, BindingResult binding) {
         if (binding.hasErrors()) {
-            for(ObjectError error: binding.getAllErrors()) {
-                logger.error(error.getDefaultMessage());
+            for (ObjectError error : binding.getAllErrors()) {
+                _log.error(error.getDefaultMessage());
             }
             return "/user/add";
         }
         user.setCtime(System.currentTimeMillis());
-        userService.getMapper().insertSelective(user);
-        return "redirect:/user/list";
-    }
 
-    /**
-     * 新增post2,返回自增主键值
-     * @param user
-     * @param binding
-     * @return
-     */
-    @RequestMapping(value = "/add2", method = RequestMethod.POST)
-    public String add2(@Valid  User user, BindingResult binding) {
-        if (binding.hasErrors()) {
-            return "/user/add";
-        }
-        user.setCtime(System.currentTimeMillis());
-        userService.insertAutoKey(user);
-        System.out.println(user.getId());
+        userService.getMapper().insertSelective(user);
+
+        _log.info("新增记录id为：{}", user.getId());
+
         return "redirect:/user/list";
     }
 
@@ -137,8 +125,8 @@ public class UserController extends BaseController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable int id) {
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
+    public String delete(@PathVariable("id") int id) {
         userService.getMapper().deleteByPrimaryKey(id);
         return "redirect:/user/list";
     }
@@ -150,22 +138,30 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-    public String update(@PathVariable int id, Model model) {
+    public String update(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getMapper().selectByPrimaryKey(id));
         return "/user/update";
     }
 
+    /**
+     * 修改post
+     * @param id
+     * @param user
+     * @param binding
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public String update(@PathVariable int id, @Valid User user, BindingResult binding, Model model) {
+    public String update(@PathVariable("id") int id, @Valid User user, BindingResult binding, Model model) {
         if (binding.hasErrors()) {
-            model.addAttribute("error", binding.getAllErrors());
-            return "usre/update/" + id;
+            model.addAttribute("errors", binding.getAllErrors());
+            return "user/update/" + id;
         }
         userService.getMapper().updateByPrimaryKeySelective(user);
         return "redirect:/user/list";
     }
 
-    /**'
+    /**
      * 上传文件
      * @param file
      * @param request
@@ -174,9 +170,9 @@ public class UserController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public Object upload(@RequestParam(value = "file", required = false)MultipartFile file, HttpServletRequest request) throws IOException {
+    public Object upload(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) throws IOException {
         // 返回结果
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<String, Object>();
         // 判断上传文件类型
         String contentType = file.getContentType().toLowerCase();
         if ((!contentType.equals("image/jpeg")) &&
@@ -184,7 +180,7 @@ public class UserController extends BaseController {
                 (!contentType.equals("image/png")) &&
                 (!contentType.equals("image/x-png")) &&
                 (!contentType.equals("image/bmp")) &&
-                (!contentType.equals("image/gif")) ) {
+                (!contentType.equals("image/gif"))) {
             map.put(RESULT, FAILED);
             map.put(DATA, "不支持该类型的文件！");
             return map;

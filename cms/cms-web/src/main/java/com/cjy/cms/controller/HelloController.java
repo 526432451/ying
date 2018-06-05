@@ -1,6 +1,6 @@
 package com.cjy.cms.controller;
 
-import com.cjy.cms.model.User;
+import com.cjy.cms.dao.model.User;
 import com.cjy.cms.service.UserService;
 import com.cjy.cms.service.impl.UserServiceImpl;
 import org.apache.commons.io.FileUtils;

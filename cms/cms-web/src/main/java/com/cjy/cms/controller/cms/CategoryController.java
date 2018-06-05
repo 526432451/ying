@@ -1,5 +1,6 @@
 package com.cjy.cms.controller.cms;
 
+import com.cjy.cms.controller.BaseController;
 import com.cjy.cms.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,15 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  * 文章类目
  * @author chenjiaying
- * @date 2018年05月25日 上午 11:47
+ * @date 2018年06月05日 下午 04:19
  */
 @Controller
 @RequestMapping("/category")
-public class CategoryController {
+public class CategoryController extends BaseController {
 
     private static Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
@@ -34,11 +34,19 @@ public class CategoryController {
         return "redirect:/category/list";
     }
 
+    /**
+     * 列表
+     * @param page
+     * @param rows
+     * @param request
+     * @return
+     */
     @RequestMapping("/list")
     public String list(
-            @RequestParam(required = false, defaultValue = "1") int Page,
+            @RequestParam(required = false, defaultValue = "1") int page,
             @RequestParam(required = false, defaultValue = "20") int rows,
             HttpServletRequest request) {
+
         return "/category/list";
     }
 }
