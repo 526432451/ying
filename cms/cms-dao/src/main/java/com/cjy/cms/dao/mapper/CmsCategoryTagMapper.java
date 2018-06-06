@@ -2,7 +2,6 @@ package com.cjy.cms.dao.mapper;
 
 import com.cjy.cms.dao.model.CmsCategoryTag;
 import com.cjy.cms.dao.model.CmsCategoryTagExample;
-
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

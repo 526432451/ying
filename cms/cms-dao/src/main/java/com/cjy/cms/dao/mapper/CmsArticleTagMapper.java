@@ -1,8 +1,7 @@
 package com.cjy.cms.dao.mapper;
 
-import com.cjy.cms.dao.model.CmsArticleTagExample;
 import com.cjy.cms.dao.model.CmsArticleTag;
-
+import com.cjy.cms.dao.model.CmsArticleTagExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

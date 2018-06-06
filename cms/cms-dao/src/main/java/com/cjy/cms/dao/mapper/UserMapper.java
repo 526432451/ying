@@ -2,9 +2,8 @@ package com.cjy.cms.dao.mapper;
 
 import com.cjy.cms.dao.model.User;
 import com.cjy.cms.dao.model.UserExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     int countByExample(UserExample example);
