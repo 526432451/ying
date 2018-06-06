@@ -1,6 +1,5 @@
-package com.cjy.cms.controller.cms;
+package com.cjy.cms.controller;
 
-import com.cjy.cms.controller.BaseController;
 import com.cjy.cms.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/category")
 public class CategoryController extends BaseController {
 
-    private static Logger logger = LoggerFactory.getLogger(CategoryController.class);
+    private static Logger _log = LoggerFactory.getLogger(CategoryController.class);
 
     @Autowired
     private UserService userService;

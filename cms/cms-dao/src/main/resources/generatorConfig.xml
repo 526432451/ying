@@ -8,7 +8,7 @@
 
     <!-- mysql驱动包 -->
     <classPathEntry
-            location="D:\server\mysql-connector-java-5.1.34.jar"/>
+            location="${classPathEntry}"/>
 
     <context id="context" targetRuntime="MyBatis3">
 
@@ -29,6 +29,17 @@
         <!-- 生成一个新的selectByExample方法，这个方法可以接受一个RowBounds参数，主要用来实现分页 -->
         <plugin type="com.cjy.common.plugin.PaginationPlugin"/>
 
+        <!-- 生成在XML中的<cache>元素 -->
+        <plugin type="org.mybatis.generator.plugins.CachePlugin">
+            <property name="cache_eviction" value="LRU" />
+            <property name="cache_flushInterval" value="60000" />
+            <property name="cache_readOnly" value="true" />
+            <property name="cache_size" value="1024" />
+        </plugin>
+
+        <!-- Java模型生成equals和hashcode方法 -->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"></plugin>
+
         <!-- 生成的代码去掉注释 -->
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
@@ -41,13 +52,13 @@
                         password="${jdbc.password}"/>
 
         <!-- model生成 -->
-        <javaModelGenerator targetPackage="com.cjy.cms.dao.model" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="${generator.javaModelGenerator.targetPackage}" targetProject="src/main/java"/>
 
         <!-- MapperXML生成 -->
-        <sqlMapGenerator targetPackage="com.cjy.cms.dao.mapper" targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="${generator.sqlMapGenerator.targetPackage}" targetProject="src/main/java"/>
 
         <!-- Mapper接口生成 -->
-        <javaClientGenerator targetPackage="com.cjy.cms.dao.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
+        <javaClientGenerator targetPackage="${generator.javaClientGenerator.targetPackage}" targetProject="src/main/java" type="XMLMAPPER"/>
 
         <!-- 需要映射的表 -->
         <table tableName="user" domainObjectName="User">

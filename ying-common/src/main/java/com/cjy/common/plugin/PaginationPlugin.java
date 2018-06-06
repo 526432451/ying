@@ -23,7 +23,7 @@ public class PaginationPlugin extends PluginAdapter {
     }
 
     /**
-     * 为每个Example类添加limit和offset属性已经set、get方法
+     * 为每个Example类添加limit和offset属性和set、get方法
      */
     @Override
     public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
@@ -74,7 +74,7 @@ public class PaginationPlugin extends PluginAdapter {
     }
 
     /**
-     * 为Mapper.xml的selectByExample添加limit
+     * 为Mapper.xml的selectByExample添加limit,offset
      */
     @Override
     public boolean sqlMapSelectByExampleWithoutBLOBsElementGenerated(XmlElement element,
