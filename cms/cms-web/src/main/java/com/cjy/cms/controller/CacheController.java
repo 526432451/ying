@@ -1,6 +1,10 @@
 package com.cjy.cms.controller;
 
 import com.cjy.common.EhCacheUtil;
+import com.cjy.common.util.PropertiesFileUtil;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -20,7 +24,17 @@ public class CacheController {
 
     private static Logger _log = LoggerFactory.getLogger(CacheController.class);
 
-    private final static String CACHE_NAME = "ehcache_common";
+    private final static String EHCACHE_NAME = PropertiesFileUtil.getInstance().get("ehcache");
+
+   /* @Autowired
+    private UserService userService;*/
+
+    @RequestMapping("/test")
+    @ResponseBody
+    public Object test(HttpServletRequest request) {
+        System.out.println(System.getProperty("java.io.tmpdir"));
+        return "success";
+    }
 
     /**
      * 新增缓存记录
@@ -32,7 +46,7 @@ public class CacheController {
     public Object add(HttpServletRequest request) {
         String key = request.getParameter("key");
         String value = request.getParameter("value");
-        EhCacheUtil.put(CACHE_NAME, key, value);
+        EhCacheUtil.put(EHCACHE_NAME, key, value);
         return "success";
     }
 
@@ -45,7 +59,7 @@ public class CacheController {
     @ResponseBody
     public Object remove(HttpServletRequest request) {
         String key = request.getParameter("key");
-        EhCacheUtil.remove(CACHE_NAME, key);
+        EhCacheUtil.remove(EHCACHE_NAME, key);
         return "success";
     }
 
@@ -58,11 +72,29 @@ public class CacheController {
     @ResponseBody
     public Object get(HttpServletRequest request) {
         String key = request.getParameter("key");
-        Object object = EhCacheUtil.get(CACHE_NAME, key);
+        Object object = EhCacheUtil.get(EHCACHE_NAME, key);
         if (null == object) {
             _log.debug("【Ehcache】没有找到key={}的记录！", key);
-            return "value";
+            return "";
         }
         return object;
+    }
+
+    public static void main(String[] args) {
+        // EhCache调用
+        // Create a cache manager
+        final CacheManager cacheManager = CacheManager.getInstance();
+        // create the cache called "hello-world"
+        final Cache cache = cacheManager.getCache("ehcache");
+        // create a key to map the data to
+        final String key = "key";
+        // Create a data element
+        final Element element = new Element(key, "value");
+        // Put the element into the data store
+        cache.put(element);
+        // Retrieve the data element
+        final Element cacheElement = cache.get(key);
+        // Print the value
+        System.out.println(cacheElement.getObjectValue());
     }
 }

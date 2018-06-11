@@ -3,10 +3,10 @@
 <mapper namespace="com.cjy.cms.dao.mapper.UserVOMapper">
 
     <!-- 缓存 -->
-    <!--<cache type="PERPETUAL" eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>-->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
 
     <!-- 结果映射关系 -->
-    <resultMap id="UserResultMap" type="userVO">
+    <resultMap id="UserResultMap" type="com.cjy.cms.dao.model.UserVO">
         <id column="u_id" property="id"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>
@@ -14,7 +14,7 @@
         <result column="sex" property="sex"/>
         <result column="ctime" property="ctime"/>
         <result column="content" property="content" />
-        <collection column="userid" property="books" ofType="Book">
+        <collection column="userid" property="books" ofType="com.cjy.cms.dao.model.Book">
             <id column="b_id" property="id"/>
             <result column="userid" property="userid"/>
             <result column="name" property="name"/>

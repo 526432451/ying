@@ -2,9 +2,6 @@ package com.cjy.cms.service;
 
 import com.cjy.cms.dao.model.User;
 import com.cjy.cms.dao.model.UserVO;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.Element;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +17,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({
         "classpath:applicationContext.xml",
-        "classpath:applicationContext-jdbc.xml",
-        "classpath:applicationContext-ehcache.xml"
+        "classpath:applicationContext-jdbc.xml"
 })
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 public class UserServiceTest {
@@ -38,27 +34,7 @@ public class UserServiceTest {
         User user = userService.getMapper().selectByPrimaryKey(1);
         System.out.println(null == user ? "null" : user.getNickname());
 
-        // EhCache调用
-        // Create a cache manager
-        final CacheManager cacheManager = CacheManager.getInstance();
 
-        // create the cache called "hello-world"
-        final Cache cache = cacheManager.getCache("ehcache_common");
-
-        // create a key to map the data to
-        final String key = "key";
-
-        // Create a data element
-        final Element element = new Element(key, "value");
-
-        // Put the element into the data store
-        cache.put(element);
-
-        // Retrieve the data element
-        final Element cacheElement = cache.get(key);
-
-        // Print the value
-        System.out.println(cacheElement.getObjectValue());
     }
 
 }

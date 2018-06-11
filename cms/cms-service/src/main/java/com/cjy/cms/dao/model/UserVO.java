@@ -1,8 +1,5 @@
 package com.cjy.cms.dao.model;
 
-import com.cjy.cms.dao.model.Book;
-import com.cjy.cms.dao.model.User;
-
 import java.util.List;
 
 /**

@@ -46,7 +46,7 @@ public class PropertiesFileUtil {
     }
 
     // 根据key读取value
-    public String getValue(String key) {
+    public String get(String key) {
         try {
             String value = resourceBundle.getString(key);
             return value;
