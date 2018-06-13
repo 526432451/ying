@@ -1,5 +1,6 @@
 package com.cjy.cms.controller;
 
+import com.cjy.cms.service.UserService;
 import com.cjy.common.EhCacheUtil;
 import com.cjy.common.util.PropertiesFileUtil;
 import net.sf.ehcache.Cache;
@@ -7,6 +8,7 @@ import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,8 +28,8 @@ public class CacheController {
 
     private final static String EHCACHE_NAME = PropertiesFileUtil.getInstance().get("ehcache");
 
-   /* @Autowired
-    private UserService userService;*/
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/test")
     @ResponseBody

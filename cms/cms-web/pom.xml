@@ -92,6 +92,7 @@
                 <version>8.1.9.v20130131</version>
                 <configuration>
                     <scanIntervalSeconds>3</scanIntervalSeconds>
+                    <contextXml>src/main/resources/jetty-context.xml</contextXml>
                     <webApp>
                         <contextPath>/cms-web</contextPath>
                     </webApp>
