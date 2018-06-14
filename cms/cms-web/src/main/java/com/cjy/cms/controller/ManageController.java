@@ -25,4 +25,5 @@ public class ManageController {
     public Object login(){
         return "/manage/login";
     }
+
 }
